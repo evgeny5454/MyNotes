@@ -53,6 +53,7 @@ public class DetailsFragment extends Fragment {
         Note note = getArguments().getParcelable(ARG_NOTE);
 
         title.setText(note.getTitle());
+
         content.setText(note.getContent());
 
 

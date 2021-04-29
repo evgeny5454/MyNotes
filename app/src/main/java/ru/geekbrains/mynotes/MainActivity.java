@@ -36,9 +36,15 @@ public class MainActivity extends AppCompatActivity implements ListFragment.onNo
         boolean islandScape = getResources().getBoolean(R.bool.isLandScape);
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        if (!islandScape) {
+        if (islandScape) {
+
             fragmentManager.beginTransaction()
-                    .replace(R.id.container,DetailsFragment.newInstance(note))
+                    .replace(R.id.details_fragment, DetailsFragment.newInstance(note))
+                    .commit();
+        } else {
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, DetailsFragment.newInstance(note))
                     .addToBackStack(null)
                     .commit();
         }

@@ -60,4 +60,5 @@ public class Note implements Parcelable {
         dest.writeString(content);
         dest.writeInt(drawbleRes);
     }
+
 }
