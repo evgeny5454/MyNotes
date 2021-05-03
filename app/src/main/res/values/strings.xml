@@ -9,4 +9,7 @@
     <string name="dell_note">Удалить</string>
     <string name="favorites">Добавить в избраное</string>
     <string name="pin_to_home_screen">Закрепить на главном экране</string>
+    <string name="general_note">Главная</string>
+    <string name="settings">Настройки</string>
+    <string name="trash">Корзина</string>
 </resources>
