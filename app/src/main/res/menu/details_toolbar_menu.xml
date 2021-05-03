@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/save_note"
+        android:title="@string/save"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/dell_note"
+        android:title="@string/dell_note"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/favorites"
+        android:title="@string/favorites"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/pin_to_home_screen"
+        android:title="@string/pin_to_home_screen"
+        app:showAsAction="never" />
+
+</menu>

@@ -1,10 +1,13 @@
 package ru.geekbrains.mynotes;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import ru.geekbrains.mynotes.domain.Note;
 
@@ -14,6 +17,9 @@ public class MainActivity extends AppCompatActivity implements ListFragment.onNo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Toolbar first_toolbar = findViewById(R.id.first_toolbar);
+        //Toolbar details_toolbar = findViewById(R.id.details_toolbar);
 
         boolean islandScape = getResources().getBoolean(R.bool.isLandScape);
 
