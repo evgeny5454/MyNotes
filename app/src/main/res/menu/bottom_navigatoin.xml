@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/general_note"
+        android:title="@string/general_note"
+        android:icon="@drawable/ic_baseline_bookmark_border_24"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/trash"
+        android:title="@string/trash"
+        android:icon="@drawable/ic_baseline_restore_from_trash_24"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        app:showAsAction="ifRoom" />
+
+</menu>
