@@ -1,38 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/first_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/toolbar_menu"
-            app:title="@string/app_name"/>
-
-    </com.google.android.material.appbar.AppBarLayout>
-<androidx.core.widget.NestedScrollView
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notes_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.list.NotesFragment"
-        android:orientation="vertical">
-
-
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+        android:layout_height="match_parent"/>
 
 
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,12 +1,15 @@
 package ru.geekbrains.mynotes.ui.list;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -21,34 +24,19 @@ import java.util.List;
 
 import ru.geekbrains.mynotes.R;
 import ru.geekbrains.mynotes.domain.Note;
-import ru.geekbrains.mynotes.domain.NotesRepository;
+import ru.geekbrains.mynotes.domain.MockNotesRepository;
 
 
 public class NotesFragment extends Fragment {
 
-    public interface onNoteClicked  {
-        void onNoteClicked (Note note);
-    }
-
-    private onNoteClicked onNoteClicked;
-
-    public NotesFragment() {
-        // Required empty public constructor
-    }
+    private NotesListViewModel viewModel;
+    private AdapterListNote adapter;
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        if (context instanceof onNoteClicked) {
-            onNoteClicked = (onNoteClicked) context;
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        onNoteClicked = null;
-        super.onDetach();
+        viewModel = new ViewModelProvider(this).get(NotesListViewModel.class);
     }
 
     @Override
@@ -62,49 +50,26 @@ public class NotesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Note> notes = new NotesRepository().getNotes();
-        LinearLayout notesList = view.findViewById(R.id.notes_list);
-        Toolbar first_toolbar = view.findViewById(R.id.first_toolbar);
+        viewModel = new NotesListViewModel();
+        adapter = new AdapterListNote(this);
+        RecyclerView notesList = view.findViewById(R.id.notes_list);
 
-        first_toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+        RecyclerView.LayoutManager lm = new LinearLayoutManager(requireContext(),
+                LinearLayoutManager.VERTICAL,false);
+        notesList.setLayoutManager(lm);
+        notesList.setAdapter(adapter);
+
+        if (savedInstanceState == null) {
+            viewModel.requestNotes();
+        }
+
+        viewModel.getNotesLiveData().observe(getViewLifecycleOwner(), new Observer<List<Note>>() {
             @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.new_note) {
-                    Toast.makeText(requireActivity(),"создать новую заметку",Toast.LENGTH_LONG).show();
-                    return true;
-                }
-
-                if (item.getItemId() == R.id.view_option) {
-                    Toast.makeText(requireActivity(),"Смена вида отображения",Toast.LENGTH_LONG).show();
-                    return true;
-                }
-                return false;
+            public void onChanged(List<Note> notes) {
+                adapter.addData(notes);
             }
         });
+        adapter.notifyDataSetChanged();
 
-        for (Note note : notes) {
-            View noteView = LayoutInflater.from(requireContext()).inflate(R.layout.item_note, notesList, false);
-
-            noteView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    openNoteDetail(note);
-                }
-            });
-
-            ImageView image = noteView.findViewById(R.id.image);
-            image.setImageResource(note.getDrawbleRes());
-
-            TextView title = noteView.findViewById(R.id.title);
-            title.setText(note.getTitle());
-
-            notesList.addView(noteView);
-        }
-    }
-
-    private void openNoteDetail (Note note) {
-        if (onNoteClicked != null) {
-            onNoteClicked.onNoteClicked(note);
-        }
     }
 }

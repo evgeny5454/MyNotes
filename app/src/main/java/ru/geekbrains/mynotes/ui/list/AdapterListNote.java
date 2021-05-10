@@ -6,33 +6,38 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import ru.geekbrains.mynotes.R;
+import ru.geekbrains.mynotes.domain.Note;
 
-public class AdapterListNote extends RecyclerView.Adapter<AdapterListNote.ListNoteViewHolder> {
+public class AdapterListNote extends RecyclerView.Adapter<AdapterListNote.NotesViewHolder> {
 
-    private final ArrayList<String> data = new ArrayList<>();
+    private ArrayList<Note> data = new ArrayList<>();
 
-    public void addData (List<String> toAdd) {
-        data.addAll(toAdd);
+    private Fragment fragment;
+
+    public AdapterListNote(Fragment fragment) {
+        this.fragment = fragment;
     }
-
 
     @NonNull
     @Override
-    public ListNoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_list,parent,false);
-
-        return new ListNoteViewHolder(view);
+    public NotesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note,
+                parent, false);
+        return new NotesViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListNoteViewHolder holder, int position) {
-        holder.title.setText (data.get(position));
+    public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {
+        Note note = data.get(position);
+        holder.title.setText(note.getTitle());
+        holder.content.setText(note.getContent());
     }
 
     @Override
@@ -40,14 +45,20 @@ public class AdapterListNote extends RecyclerView.Adapter<AdapterListNote.ListNo
         return data.size();
     }
 
-    static class ListNoteViewHolder extends RecyclerView.ViewHolder {
+    public void addData(List<Note> notes) {
+        data.clear();
+        data.addAll(notes);
+    }
+
+    static class NotesViewHolder extends RecyclerView.ViewHolder {
 
         TextView title;
+        TextView content;
 
-        public ListNoteViewHolder(@NonNull View itemView) {
+        public NotesViewHolder(@NonNull View itemView) {
             super(itemView);
-
             title = itemView.findViewById(R.id.title);
+            content = itemView.findViewById(R.id.content);
         }
     }
 }
