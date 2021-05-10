@@ -1,29 +1,25 @@
 package ru.geekbrains.mynotes;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ru.geekbrains.mynotes.domain.Note;
+import ru.geekbrains.mynotes.ui.detals.DetailsFragment;
+import ru.geekbrains.mynotes.ui.list.NotesFragment;
 
-public class MainActivity extends AppCompatActivity implements ListFragment.onNoteClicked {
+public class MainActivity extends AppCompatActivity implements NotesFragment.onNoteClicked {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        /*bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.general_note) {
@@ -41,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.onNo
                 }
                 return false;
             }
-        });
+        });*/
 
         boolean islandScape = getResources().getBoolean(R.bool.isLandScape);
 
@@ -53,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.onNo
 
             if (fragment == null) {
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container,new ListFragment())
+                        .replace(R.id.container,new NotesFragment())
                         .commit();
             }
         }

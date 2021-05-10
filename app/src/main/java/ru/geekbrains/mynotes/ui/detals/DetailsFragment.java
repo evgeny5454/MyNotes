@@ -1,4 +1,4 @@
-package ru.geekbrains.mynotes;
+package ru.geekbrains.mynotes.ui.detals;
 
 import android.os.Bundle;
 
@@ -12,10 +12,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import ru.geekbrains.mynotes.R;
 import ru.geekbrains.mynotes.domain.Note;
 
 import static java.lang.String.valueOf;

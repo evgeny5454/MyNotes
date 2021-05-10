@@ -1,4 +1,4 @@
-package ru.geekbrains.mynotes;
+package ru.geekbrains.mynotes.ui.list;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,11 +19,12 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import ru.geekbrains.mynotes.R;
 import ru.geekbrains.mynotes.domain.Note;
 import ru.geekbrains.mynotes.domain.NotesRepository;
 
 
-public class ListFragment extends Fragment {
+public class NotesFragment extends Fragment {
 
     public interface onNoteClicked  {
         void onNoteClicked (Note note);
@@ -31,7 +32,7 @@ public class ListFragment extends Fragment {
 
     private onNoteClicked onNoteClicked;
 
-    public ListFragment() {
+    public NotesFragment() {
         // Required empty public constructor
     }
 
