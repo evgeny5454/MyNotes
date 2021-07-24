@@ -9,20 +9,17 @@ public class Note implements Parcelable {
 
     private final String title;
     private final String content;
-    @DrawableRes
-    private final int drawbleRes;
 
-
-    public Note(String title, String content, int drawbleRes) {
+    public Note(String title, String content) {
         this.title = title;
         this.content = content;
-        this.drawbleRes = drawbleRes;
+
     }
 
     protected Note(Parcel in) {
         title = in.readString();
         content = in.readString();
-        drawbleRes = in.readInt();
+
     }
 
     public static final Creator<Note> CREATOR = new Creator<Note>() {
@@ -45,9 +42,7 @@ public class Note implements Parcelable {
         return content;
     }
 
-    public int getDrawbleRes() {
-        return drawbleRes;
-    }
+
 
     @Override
     public int describeContents() {
@@ -58,7 +53,7 @@ public class Note implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title);
         dest.writeString(content);
-        dest.writeInt(drawbleRes);
+
     }
 
 }
